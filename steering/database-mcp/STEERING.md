@@ -12,10 +12,11 @@ The `mcp.json` bundled with this power configures stdio automatically. Requires 
 
 | Variable | Description |
 | --- | --- |
-| `SURREAL_USER` | Database username |
-| `SURREAL_PASS` | Database password |
-| `SURREAL_NS` | Namespace to connect to (optional) |
-| `SURREAL_DB` | Database to connect to (optional) |
+| `SURREALDB_HOST` | Endpoint for the `instance` server, e.g. `http://localhost:8000` |
+| `SURREALDB_USER` | Database username |
+| `SURREALDB_PASSWORD` | Database password |
+| `SURREALDB_NAMESPACE` | Namespace (optional) |
+| `SURREALDB_NAME` | Database name (optional) |
 
 **HTTP** (remote or SurrealDB Cloud):
 

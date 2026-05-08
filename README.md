@@ -26,17 +26,23 @@ This power includes [SurrealMCP](https://surrealdb.com/mcp) with two pre-configu
 
 | Server | Transport | Use for |
 | --- | --- | --- |
-| `local` | stdio | Self-hosted SurrealDB at `http://localhost:8000` |
+| `instance` | stdio | Self-hosted SurrealDB |
 | `cloud` | stdio | SurrealDB Cloud |
 
 Both servers use the SurrealDB CLI (`surreal mcp stdio`) and require the following environment variables:
 
 | Variable | Description |
 | --- | --- |
-| `SURREAL_USER` | Database username |
-| `SURREAL_PASS` | Database password |
-| `SURREAL_NS` | Namespace (optional) |
-| `SURREAL_DB` | Database (optional) |
+| `SURREALDB_USER` | Database username |
+| `SURREALDB_PASSWORD` | Database password |
+| `SURREALDB_NAMESPACE` | Namespace (optional) |
+| `SURREALDB_NAME` | Database name (optional) |
+
+The `instance` server also requires:
+
+| Variable | Description |
+| --- | --- |
+| `SURREALDB_HOST` | SurrealDB endpoint, e.g. `http://localhost:8000` |
 
 ## License
 
