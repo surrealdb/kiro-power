@@ -2,7 +2,7 @@
 name: "surrealdb"
 displayName: "SurrealDB"
 description: "SurrealDB power for Kiro — SurrealQL, Python SDK, vector search, and direct connection guidance."
-keywords: ["surrealdb", "surreal", "surrealql", "surql", "surrealmcp", "surrealdb-python", "hnsw", "vector search"]
+keywords: ["surrealdb", "surreal", "surrealql", "surql", "surrealmcp", "mcp", "surrealdb-python", "hnsw", "vector search"]
 author: "SurrealDB"
 ---
 
@@ -40,3 +40,4 @@ Route to the relevant steering file based on what the user is working on:
 - Using SurrealDB with Python → `steering/surrealdb-python.md`
 - Vector search, HNSW indexes, KNN queries, semantic search, or RAG → `steering/surrealdb-vector.md`
 - Connecting to SurrealDB, starting a server, or configuring authentication → `steering/surrealdb-connection.md`
+- Using SurrealMCP, inspecting or querying via MCP tools → `steering/database-mcp/STEERING.md`

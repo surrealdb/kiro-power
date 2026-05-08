@@ -1,0 +1,31 @@
+{
+	"mcpServers": {
+		"cloud": {
+			"command": "surreal",
+			"args": [
+				"mcp",
+				"stdio"
+			],
+			"env": {
+				"SURREAL_USER": "${SURREAL_USER}",
+				"SURREAL_PASS": "${SURREAL_PASS}",
+				"SURREAL_NS": "${SURREAL_NS}",
+				"SURREAL_DB": "${SURREAL_DB}"
+			}
+		},
+		"local": {
+			"command": "surreal",
+			"args": [
+				"mcp",
+				"stdio"
+			],
+			"env": {
+				"SURREAL_ENDPOINT": "ws://localhost:8000",
+				"SURREAL_USER": "${SURREAL_USER}",
+				"SURREAL_PASS": "${SURREAL_PASS}",
+				"SURREAL_NS": "${SURREAL_NS}",
+				"SURREAL_DB": "${SURREAL_DB}"
+			}
+		}
+	}
+}
