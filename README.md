@@ -26,7 +26,7 @@ This power includes [SurrealMCP](https://surrealdb.com/mcp) with two pre-configu
 
 | Server | Transport | Use for |
 | --- | --- | --- |
-| `local` | stdio | Self-hosted SurrealDB at `ws://localhost:8000` |
+| `local` | stdio | Self-hosted SurrealDB at `http://localhost:8000` |
 | `cloud` | stdio | SurrealDB Cloud |
 
 Both servers use the SurrealDB CLI (`surreal mcp stdio`) and require the following environment variables:
