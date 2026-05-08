@@ -18,19 +18,24 @@ surreal version
 
 If the command is not found, direct the user to https://surrealdb.com/install for installation instructions.
 
-Create the following hooks in `.kiro/hooks/`:
+Create the following hook file in `.kiro/hooks/`:
 
-**surrealdb-validate.json** — validate `.surql` files on save:
-- Trigger: File Save, pattern `**/*.surql`
-- Action: Run Command `surreal validate ${file}`
-
-**surrealdb-format.json** — format `.surql` files on save:
-- Trigger: File Save, pattern `**/*.surql`
-- Action: Run Command `npx @surrealdb/surql-fmt --write ${file}`
-
-**surrealdb-health.json** — check server status on demand:
-- Trigger: Manual
-- Action: Ask Kiro to run `surreal version` and `curl -s http://localhost:8000/health`, then report whether the server is reachable
+`.kiro/hooks/surrealdb-health.kiro.hook`
+```json
+{
+  "enabled": true,
+  "name": "SurrealDB Health Check",
+  "description": "Check whether the local SurrealDB server is reachable",
+  "version": "1",
+  "when": {
+    "type": "manual"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Run `surreal version` and `curl -s http://localhost:8000/health`, then report whether the SurrealDB server is reachable and what version is installed."
+  }
+}
+```
 
 ## Steering
 
