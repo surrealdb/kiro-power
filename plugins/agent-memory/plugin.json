@@ -1,20 +1,20 @@
 {
 	"$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
-	"name": "spectron",
+	"name": "agent-memory",
 	"displayName": "SurrealDB Agent Memory",
 	"version": "1.0.0",
-	"description": "Give Kiro persistent memory across sessions with SurrealDB Agent Memory (Spectron) — recall past decisions, remember durable facts, and reason across a project's history.",
+	"description": "Give Kiro persistent memory across sessions with SurrealDB Agent Memory — recall past decisions, remember durable facts, and reason across a project's history.",
 	"author": {
 		"name": "SurrealDB",
 		"url": "https://surrealdb.com"
 	},
 	"keywords": [
-		"spectron",
 		"agent memory",
+		"surrealdb agent memory",
 		"persistent memory",
 		"recall",
 		"remember",
-		"surrealdb agent memory"
+		"project memory"
 	],
 	"license": "Apache-2.0",
 	"homepage": "https://surrealdb.com/docs/agent-memory",

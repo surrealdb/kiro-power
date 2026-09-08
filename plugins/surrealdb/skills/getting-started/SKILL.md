@@ -88,4 +88,4 @@ Every skill in this power activates on its own from what you are working on. Poi
 | Endpoints, `USE`, authentication | **surrealdb-connection** |
 | Querying or inspecting through MCP tools | **surrealdb-mcp** |
 
-For persistent memory across sessions — recalling past decisions instead of re-explaining them — install the separate **spectron** power (SurrealDB Agent Memory).
+For persistent memory across sessions — recalling past decisions instead of re-explaining them — install the separate **agent-memory** power (SurrealDB Agent Memory).

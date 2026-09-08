@@ -9,7 +9,7 @@ Two [Agent Plugins](https://agent-plugins.org) for [Kiro](https://kiro.dev), bui
 | Power | What it gives Kiro |
 | --- | --- |
 | [`surrealdb`](plugins/surrealdb) | SurrealQL, schema and index design, the `surreal` CLI, SurrealKit migrations, the Python and JavaScript SDKs, vector search, and MCP access to your instances |
-| [`spectron`](plugins/spectron) | Persistent memory across sessions with [SurrealDB Agent Memory](https://surrealdb.com/docs/agent-memory) — recall past decisions instead of re-explaining them |
+| [`agent-memory`](plugins/agent-memory) | Persistent memory across sessions with [SurrealDB Agent Memory](https://surrealdb.com/docs/agent-memory) — recall past decisions instead of re-explaining them |
 
 Because they follow the open specification, both also load in any other Agent Plugins client.
 
@@ -23,7 +23,7 @@ surrealdb-dev/kiro-power
 
 A single repository can hold several powers, so both appear and you can install either or both.
 
-**From a local clone** — Powers panel → **Add Custom Power** → **Import power from a folder**, then select `plugins/surrealdb` or `plugins/spectron`.
+**From a local clone** — Powers panel → **Add Custom Power** → **Import power from a folder**, then select `plugins/surrealdb` or `plugins/agent-memory`.
 
 Once installed, a power activates on its own when your conversation matches its keywords. Nothing loads into context until it does.
 
@@ -56,12 +56,12 @@ Since SurrealDB 3.1, every instance serves the Model Context Protocol at `/mcp` 
 
 The two have different tool surfaces. `surrealdb-local` exposes an instance's own tools (`query`, `select`, `info`, …) directly; `mcp.surrealdb.com` is the Cloud API and reaches them through `call_instance_tool`, alongside organisation, instance and billing management and a `search_documentation` tool. The `surrealdb-mcp` skill covers both, and how to reach a remote or secured instance through Kiro's own `.kiro/settings/mcp.json`.
 
-## The `spectron` power
+## The `agent-memory` power
 
 | Skill | Activates on |
 | --- | --- |
 | `getting-started` | Setup, sign-in, ambient memory hooks, connection failures |
-| `spectron` | Spectron or agent memory mentioned, memory tools in use, "remember this", "what did we decide" |
+| `agent-memory` | Agent memory mentioned, memory tools in use, "remember this", "what did we decide" |
 
 This power ships **no** `mcp.json`. The seven memory tools — `remember`, `recall`, `context`, `reflect`, `forget`, `upload`, `inspect` — are served by your own Agent Memory context host, and an Agent Plugins manifest cannot point at it: `${VAR}` is never expanded inside a `url` or a header, and the spec forbids credentials in headers. The `getting-started` skill writes the server into Kiro's own `.kiro/settings/mcp.json` instead, where expansion works.
 
@@ -97,7 +97,7 @@ Report security issues to security@surrealdb.com rather than in a public issue.
 Neither power sends anything anywhere until you connect one of its MCP servers or install a hook.
 
 - **`surrealdb`** — MCP tool calls go to the instance you connect to: `https://mcp.surrealdb.com` after you sign in, or your own instance. Queries and their results travel over that connection.
-- **`spectron`** — calling `remember` or `upload` stores that content in your Agent Memory instance; `recall`, `context`, and `reflect` send the query. If you install the ambient memory hooks, this happens automatically each session rather than only on request. Delete the hook files or disable them in the Agent Hooks panel to stop it.
+- **`agent-memory`** — calling `remember` or `upload` stores that content in your Agent Memory instance; `recall`, `context`, and `reflect` send the query. If you install the ambient memory hooks, this happens automatically each session rather than only on request. Delete the hook files or disable them in the Agent Hooks panel to stop it.
 
 See the [SurrealDB privacy policy](https://surrealdb.com/legal/privacy).
 

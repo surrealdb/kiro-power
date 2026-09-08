@@ -88,7 +88,7 @@ The two surfaces do not collide — the managed server's tools are `call_instanc
 
 It does mean two routes to the same data, and roughly 90 extra tool definitions in context from the managed side. If you are only working against a local instance, disable the `surrealdb` server from the Powers panel for the session. The plugin format has no `disabled` field — that exists only in Kiro's own MCP configuration — so this is a runtime choice rather than something `mcp.json` can express.
 
-The **spectron** power (SurrealDB Agent Memory) is separate. It configures its own server against your Agent Memory context host; the managed server here can also reach memory through `call_spectron_tool`, which is the fallback its setup skill describes.
+The **agent-memory** power (SurrealDB Agent Memory) is separate. It configures its own server against your Agent Memory context host; the managed server here can also reach memory through `call_spectron_tool`, which is the fallback its setup skill describes.
 
 ## Local stdio (server-less) alternative
 
