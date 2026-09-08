@@ -1,16 +1,14 @@
 ---
-name: spectron
-description: "Use SurrealDB Agent Memory (Spectron) to remember and recall durable project knowledge across sessions — conventions, past decisions, team preferences, and ongoing work — through the `remember`, `recall`, `context`, `reflect`, `forget`, `upload`, and `inspect` memory tools, with per-repository scopes. Use when the user references Spectron or agent memory, when memory tools appear in the active toolset, when they ask what was decided earlier or want something remembered, or when a session should start by loading what previous sessions established. Triggers: Spectron, agent memory, persistent memory, remember this, what did we decide, recall, forget that, scope, lens, project memory."
+name: agent-memory
+description: "Use SurrealDB Agent Memory to remember and recall durable project knowledge across sessions — conventions, past decisions, team preferences, and ongoing work — through the `remember`, `recall`, `context`, `reflect`, `forget`, `upload`, and `inspect` memory tools, with per-repository scopes. Use when the user references agent memory or persistent memory, when memory tools appear in the active toolset, when they ask what was decided earlier or want something remembered, or when a session should start by loading what previous sessions established. Triggers: agent memory, persistent memory, project memory, remember this, what did we decide, recall, forget that, memory scope, lens."
 metadata:
   author: surrealdb
   version: "0.1.0"
 ---
 
-# SurrealDB Agent Memory (Spectron)
+# SurrealDB Agent Memory
 
 SurrealDB Agent Memory is a memory and knowledge layer for agents. It runs as an application tier in front of SurrealDB: text you store is extracted into entities, attributes and relations, reconciled against what is already known, and stamped with provenance, so a later session retrieves it as knowledge rather than as chat log.
-
-**Spectron** is the name it was developed under. The product is SurrealDB Agent Memory; the packages, binaries, environment variables and the MCP server are all still named `spectron*`. Both names mean the same thing.
 
 It is **not** a SurrealDB database server. SurrealQL, schema and record work belongs to the **surrealdb** power.
 

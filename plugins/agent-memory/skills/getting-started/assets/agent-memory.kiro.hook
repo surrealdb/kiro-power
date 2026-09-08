@@ -1,5 +1,5 @@
 {
-	"id": "spectron-memory",
+	"id": "agent-memory",
 	"enabled": true,
 	"name": "Load project memory",
 	"description": "Load what earlier sessions established about this project before responding",
