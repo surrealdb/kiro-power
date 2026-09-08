@@ -1,6 +1,20 @@
 # SurrealDB Connection
 
+Use this steering when connecting to a SurrealDB instance — whether it is self-hosted (local or your own server) or a managed SurrealDB Cloud instance. The connection flow is the same in both cases; only the endpoint and how it is provisioned differ.
+
+## Connection targets
+
+| Target | Endpoint format | Notes |
+| --- | --- | --- |
+| Local (self-hosted) | `ws://localhost:8000/rpc`, `http://localhost:8000` | You run the server yourself with `surreal start` (see below) |
+| Remote (self-hosted) | `wss://<host>/rpc`, `https://<host>` | Your own server behind TLS |
+| SurrealDB Cloud | `wss://<instance>.surreal.cloud/rpc`, `https://<instance>.surreal.cloud` | Managed; always TLS (`wss`/`https`). Copy the endpoint from the Cloud dashboard or Surrealist — you do **not** run `surreal start` for Cloud |
+
+In all cases: **connect → `USE` a namespace and database → sign in**, then run queries. Cloud instances are always encrypted, so use `wss://` / `https://` (never `ws://`/`http://`).
+
 ## Starting a SurrealDB Server
+
+This section applies to **self-hosted** instances only — a SurrealDB Cloud instance is already running and managed for you. For full CLI coverage of `surreal start` and storage backends, see the `surrealdb-cli` steering.
 
 In-memory (data lost on restart):
 
@@ -36,8 +50,9 @@ surreal start --bind 0.0.0.0:8000 -u root -p root rocksdb:./data
 SurrealDB's primary connection protocol for SDK and RPC communication is WebSocket over `/rpc`.
 
 ```
-ws://localhost:8000/rpc    # local, unencrypted
-wss://myhost.example.com/rpc  # remote, TLS
+ws://localhost:8000/rpc           # local, unencrypted
+wss://myhost.example.com/rpc      # remote self-hosted, TLS
+wss://<instance>.surreal.cloud/rpc  # SurrealDB Cloud, always TLS
 ```
 
 **After connecting, always:**
@@ -49,7 +64,9 @@ Example (Python):
 ```python
 from surrealdb import Surreal
 
-with Surreal("ws://localhost:8000/rpc") as db:
+# Local: "ws://localhost:8000/rpc"
+# Cloud: "wss://<instance>.surreal.cloud/rpc"
+with Surreal("wss://<instance>.surreal.cloud/rpc") as db:
     db.signin({"username": "root", "password": "root"})
     db.use("my_namespace", "my_database")
     result = db.query("SELECT * FROM person")
@@ -144,3 +161,4 @@ curl http://localhost:8000/sql \
 - The WebSocket connection is stateful — signin and `USE` selection persist for the lifetime of the connection.
 - HTTP requests are stateless — include `NS`, `DB`, and `Authorization` headers on every request.
 - Use `INFO FOR DB` to inspect the currently selected database's schema.
+- **SurrealDB Cloud**: the endpoint and root credentials come from the Cloud dashboard (or Surrealist) — create root auth in the instance's Authentication panel. Connections are always TLS (`wss://` / `https://`); a plain `ws://`/`http://` endpoint will not work. To drive a Cloud instance through MCP tools, see the `database-mcp` steering.

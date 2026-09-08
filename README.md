@@ -15,34 +15,35 @@ surrealdb/kiro-power
 | Steering file | Activated when you mention |
 | --- | --- |
 | `surrealql` | SurrealQL, surql, queries, schema |
+| `surrealql-performance` | slow queries, performance, record id design, indexing, EXPLAIN, computed fields |
+| `surrealql-functions` | built-in functions, function signatures, `string::`/`array::`/`math::`, LSP |
+| `surrealdb-cli` | `surreal start`, `surreal sql`, import/export, CLI, running a server |
+| `surrealkit` | SurrealKit, schema migrations, rollouts, typegen, schema tests |
 | `surrealdb-python` | Python SDK, surrealdb Python, embedded |
+| `surrealdb-js` | JavaScript/TypeScript SDK, surrealdb npm, live queries |
 | `surrealdb-vector` | vector search, HNSW, KNN, RAG, embeddings |
-| `surrealdb-connection` | connect, server, authentication, WebSocket |
-| `database-mcp` | MCP, surrealmcp, inspect, query via tools |
+| `surrealdb-connection` | connect, local or cloud instance, server, authentication, WebSocket |
+| `database-mcp` | MCP, inspect, query via tools |
 
 ## MCP
 
-This power includes [SurrealMCP](https://surrealdb.com/mcp) with two pre-configured servers:
+Since SurrealDB 3.1, every running instance serves the [Model Context Protocol](https://surrealdb.com/mcp) directly over HTTP at the `/mcp` route — no separate proxy process is needed. This power ships two pre-configured servers:
 
 | Server | Transport | Use for |
 | --- | --- | --- |
-| `instance` | stdio | Self-hosted SurrealDB |
-| `cloud` | stdio | SurrealDB Cloud |
+| `instance` | HTTP | A locally running self-hosted SurrealDB (`http://127.0.0.1:8000/mcp`) |
+| `cloud` | HTTP | SurrealDB Cloud or a remote instance |
 
-Both servers use the SurrealDB CLI (`surreal mcp stdio`) and require the following environment variables:
+`/mcp` is served on the same port as the instance's RPC/HTTP API (default `127.0.0.1:8000`).
 
-| Variable | Description |
-| --- | --- |
-| `SURREALDB_USER` | Database username |
-| `SURREALDB_PASSWORD` | Database password |
-| `SURREALDB_NAMESPACE` | Namespace (optional) |
-| `SURREALDB_NAME` | Database name (optional) |
+The `instance` server works out of the box against a local development instance. For a secured instance, add an `Authorization` header to its entry in `mcp.json`.
 
-The `instance` server also requires:
+The `cloud` server reads two environment variables:
 
 | Variable | Description |
 | --- | --- |
-| `SURREALDB_HOST` | SurrealDB endpoint, e.g. `http://localhost:8000` |
+| `SURREALDB_MCP_URL` | The instance's MCP endpoint, e.g. `https://<instance>.surreal.cloud/mcp` |
+| `SURREALDB_TOKEN` | Bearer token used in the `Authorization` header |
 
 ## License
 

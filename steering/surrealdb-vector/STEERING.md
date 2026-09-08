@@ -31,10 +31,10 @@ DEFINE INDEX OVERWRITE hnsw_idx_document ON document
 
 ### HNSW Parameters
 
-| Parameter | Description                                       |
-| --------- | ------------------------------------------------- |
+| Parameter | Description                                      |
+| --------- | ------------------------------------------------ |
 | DIMENSION | Vector dimensionality (must match your embeddings)|
-| DIST      | Distance function: `COSINE`, `EUCLIDEAN`, etc.    |
+| DIST      | Distance function: `COSINE`, `EUCLIDEAN`, etc.   |
 | TYPE      | Numeric type: `F64`, `F32`, `I64`, `I32`, `I16`  |
 | EFC       | Construction search effort (higher = better index)|
 | M         | Max connections per node                          |

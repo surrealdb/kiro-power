@@ -1,30 +1,12 @@
 {
 	"mcpServers": {
-		"cloud": {
-			"command": "surreal",
-			"args": [
-				"mcp",
-				"stdio"
-			],
-			"env": {
-				"SURREAL_USER": "${SURREALDB_USER}",
-				"SURREAL_PASS": "${SURREALDB_PASSWORD}",
-				"SURREAL_NS": "${SURREALDB_NAMESPACE}",
-				"SURREAL_DB": "${SURREALDB_NAME}"
-			}
-		},
 		"instance": {
-			"command": "surreal",
-			"args": [
-				"mcp",
-				"stdio"
-			],
-			"env": {
-				"SURREAL_ENDPOINT": "${SURREALDB_HOST}",
-				"SURREAL_USER": "${SURREALDB_USER}",
-				"SURREAL_PASS": "${SURREALDB_PASSWORD}",
-				"SURREAL_NS": "${SURREALDB_NAMESPACE}",
-				"SURREAL_DB": "${SURREALDB_NAME}"
+			"url": "http://127.0.0.1:8000/mcp"
+		},
+		"cloud": {
+			"url": "${SURREALDB_MCP_URL}",
+			"headers": {
+				"Authorization": "Bearer ${SURREALDB_TOKEN}"
 			}
 		}
 	}

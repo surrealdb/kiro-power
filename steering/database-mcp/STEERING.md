@@ -1,35 +1,34 @@
 # SurrealDB MCP
 
-Use this steering when the user asks Kiro to inspect, query, administer, or troubleshoot SurrealDB through the SurrealMCP server.
+Use this steering when the user asks Kiro to inspect, query, administer, or troubleshoot SurrealDB through SurrealDB's MCP server.
 
-## Transports
+## Per-instance MCP (SurrealDB 3.1+)
 
-SurrealMCP supports two transports. Do not guess which one the user is using — ask if it is not clear.
+Since SurrealDB 3.1, every running instance serves the Model Context Protocol directly over HTTP at the `/mcp` route — there is no separate proxy process to run. The `mcp.json` bundled with this power connects to that endpoint:
 
-**stdio** (local SurrealDB CLI):
+| Server | URL | Use for |
+| --- | --- | --- |
+| `instance` | `http://127.0.0.1:8000/mcp` | A locally running self-hosted instance |
+| `cloud` | `${SURREALDB_MCP_URL}` | SurrealDB Cloud or a remote instance |
 
-The `mcp.json` bundled with this power configures stdio automatically. Requires the `surreal` CLI to be installed and the following environment variables to be set:
+`/mcp` is served on the **same port** as the instance's RPC/HTTP API (default `127.0.0.1:8000`, set with `surreal start --bind`). A plain SQL, REST, or WebSocket endpoint is not sufficient unless that same instance also serves `/mcp`. Confirm an instance is reachable with `curl -s http://127.0.0.1:8000/health`.
 
-| Variable | Description |
-| --- | --- |
-| `SURREALDB_HOST` | Endpoint for the `instance` server, e.g. `http://localhost:8000` |
-| `SURREALDB_USER` | Database username |
-| `SURREALDB_PASSWORD` | Database password |
-| `SURREALDB_NAMESPACE` | Namespace (optional) |
-| `SURREALDB_NAME` | Database name (optional) |
+## Authentication
 
-**HTTP** (remote or SurrealDB Cloud):
+- A local development instance started without auth needs no header.
+- A secured instance requires an `Authorization` header. Add one to the server entry in `mcp.json`:
 
-Add the server manually in Kiro using the MCP endpoint URL:
+  ```json
+  "headers": { "Authorization": "Bearer ${SURREALDB_TOKEN}" }
+  ```
 
-```
-https://<cloud-instance>/mcp
-http://127.0.0.1:8000/mcp
-```
+  Basic auth with root credentials (`Authorization: Basic <base64(user:pass)>`) also works against a self-hosted instance.
+- For bearer auth, a `surreal-bearer-...` grant key is **not** a final HTTP auth token — it must be exchanged via SurrealDB signin first to obtain the JWT you pass as the Bearer token.
+- For SurrealDB Cloud, set `url` to the instance's `/mcp` URL and authenticate via `headers` (or Kiro's `oauth` config).
 
-The endpoint must expose MCP over HTTP. A plain SQL, REST, or WebSocket endpoint is not sufficient unless it also serves `/mcp`.
+## Local stdio (server-less) alternative
 
-For bearer auth, set the token in the MCP server configuration. A `surreal-bearer-...` grant key is not the same as a final HTTP auth token — it must be exchanged via SurrealDB signin first.
+If no server is running, `surreal mcp [PATH]` starts an MCP server over **stdio** backed by an embedded datastore (`memory` by default, or `rocksdb:`/`surrealkv:` for persistence). It is configured with `SURREAL_PATH`, `SURREAL_MCP_NS`, `SURREAL_MCP_DB`, `SURREAL_USER`, and `SURREAL_PASS`. This power configures the HTTP per-instance servers above rather than stdio, but the stdio mode is useful for quick, server-less local exploration.
 
 ## Usage Notes
 
