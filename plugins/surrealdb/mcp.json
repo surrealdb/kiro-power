@@ -1,0 +1,13 @@
+{
+	"$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+	"mcpServers": {
+		"surrealdb": {
+			"type": "streamable-http",
+			"url": "https://mcp.surrealdb.com"
+		},
+		"surrealdb-local": {
+			"type": "streamable-http",
+			"url": "http://127.0.0.1:8000/mcp"
+		}
+	}
+}

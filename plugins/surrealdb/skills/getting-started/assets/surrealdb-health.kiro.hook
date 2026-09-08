@@ -1,0 +1,14 @@
+{
+  "id": "surrealdb-health-check",
+  "enabled": true,
+  "name": "SurrealDB health check",
+  "description": "Report whether a local SurrealDB instance is reachable",
+  "version": "1",
+  "when": {
+    "type": "sessionStart"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Run `surreal version` and `curl -s http://127.0.0.1:8000/health`, then report in one line whether the SurrealDB server is reachable and what version is installed. Say nothing further if it is healthy."
+  }
+}
