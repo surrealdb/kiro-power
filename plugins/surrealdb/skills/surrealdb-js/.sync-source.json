@@ -1,0 +1,7 @@
+{
+	"repo": "https://github.com/surrealdb/agent-skills.git",
+	"ref": "main",
+	"commit": "b9f6873d0e93bcf733b83d20635d0839447047c7",
+	"skill": "surrealdb-js",
+	"upstream_sha256": "7a74cb58854a4c8d2bf2893a2e87b555af7476c569ace102a7ae968b9fc04f5a"
+}

@@ -1,0 +1,24 @@
+{
+	"$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+	"name": "surrealdb",
+	"displayName": "SurrealDB",
+	"version": "1.0.0",
+	"description": "Write SurrealQL, design schemas and indexes, run and operate SurrealDB from the CLI, manage migrations with SurrealKit, build vector search, and query instances over MCP.",
+	"author": {
+		"name": "SurrealDB",
+		"url": "https://surrealdb.com"
+	},
+	"keywords": [
+		"surrealdb",
+		"surrealql",
+		"surql",
+		"surrealkit",
+		"vector search",
+		"hnsw",
+		"graph database",
+		"multi-model database"
+	],
+	"license": "Apache-2.0",
+	"homepage": "https://surrealdb.com/docs",
+	"repository": "https://github.com/surrealdb-dev/kiro-power"
+}
