@@ -1,0 +1,18 @@
+# See https://github.com/surrealdb-dev/security for the promotion baseline.
+#
+# This repo ships agent plugins/skills (Markdown, shell and Python scripts)
+# and has no package manifests, so `github-actions` is the only applicable
+# ecosystem. Add further blocks if a manifest is introduced.
+version: 2
+updates:
+  # GitHub Actions — MANDATORY for every repo.
+  # Keeps the SHA-pinned `uses:` lines in .github/workflows fresh.
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 0   # security updates only
+    groups:
+      actions:
+        applies-to: security-updates
+        patterns: ["*"]
